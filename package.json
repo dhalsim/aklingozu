@@ -1,0 +1,32 @@
+{
+  "name": "aklingozu",
+  "homepage": "https://dhalsim.github.io/aklingozu",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "crawl": "node ./src/crawler",
+    "index": "node ./src/indexer",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "debug": "node --nolazy --inspect-brk=5858 src/crawler.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "elasticlunr": "^0.9.5",
+    "gh-pages": "^1.1.0",
+    "html-entities": "^1.2.1",
+    "jsonfile": "^4.0.0",
+    "lunr": "^2.1.6",
+    "luxon": "^1.0.0",
+    "node": "8.10.0",
+    "ramda": "^0.25.0",
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0",
+    "react-scripts": "1.1.3",
+    "request-promise-native": "^1.0.5"
+  }
+}
