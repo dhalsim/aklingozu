@@ -75,7 +75,6 @@ var index = elasticlunr(function () {
   this.addField('thread_desc');
   this.addField('text');
   this.setRef('id');
-  this.saveDocument(false);
 
   items.forEach(item => this.addDoc(item));
 });
@@ -83,7 +82,7 @@ var index = elasticlunr(function () {
 console.log('creating index file...');
 
 
-writeFile('./index.elastic.nospace.nodoc.json', index)
+writeFile('./index.elastic.nospace.json', index)
   .then(() => { 
     console.log('index file is created, please copy to content folder');
     console.log(util.inspect(index.search('tevrat')[0], false, null));
