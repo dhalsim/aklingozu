@@ -10,9 +10,10 @@
     "eject": "react-scripts eject",
     "crawl": "node ./src/crawler",
     "index": "node ./src/indexer",
+    "search": "node ./src/read_thread",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "debug": "node --nolazy --inspect-brk=5858 src/crawler.js"
+    "debug": "node --nolazy --inspect-brk=5858 src/read_thread.js"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
