@@ -89,7 +89,7 @@ var index = elasticlunr(function () {
 
 console.log('creating index file...');
 
-writeFile('./index.elastic.nospace.json', index)
+writeFile('./index.elastic.nohtml.json', index)
   .then(() => { 
     const tevrat = index.search('tevrat')[0];
     const bestEntry = index.documentStore.docs[tevrat.ref];
