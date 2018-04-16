@@ -6,8 +6,9 @@ const elasticlunr = require('elasticlunr');
 const debug = require('debug')('aklingozu:search');
 const readFile = util.promisify(jsonfile.readFile);
 const app = express();
+const port = process.env.PORT || 2221;
 
-app.listen(2221, () => console.log('Search api server listening on port 2221!'));
+app.listen(port, () => console.log(`Search api server listening on port ${port}`));
 
 const findThreads = (index) => (req, res, next) => {
   const searchTerm = req.params.searchTerm;
