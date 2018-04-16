@@ -79,12 +79,14 @@ var index = lunr(function () {
 });
 */
 
-var index = elasticlunr(function () {
+const index = elasticlunr(function () {
   this.addField('thread_desc');
   this.addField('text');
   this.setRef('id');
 
-  items.forEach(item => this.addDoc(item));
+  for (const item of items){
+    this.addDoc(item);
+  }
 });
 
 console.log('creating index file...');

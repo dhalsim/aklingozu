@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 
 import { threads } from './content/fihrist.json';
+import { SearchList } from './components/SearchList';
 
 import logo from './logo.svg';
 import './App.css';
@@ -9,28 +10,62 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { loaded: false };
+    this.state = { 
+      loaded: false,
+      index: null,
+      search: ''
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.clearSearch = this.clearSearch.bind(this);
   }
 
-  handleSearch() {
-    console.log('clicked');
+  clearSearch() {
+    this.setState({ search: '' });
+  }
+
+  handleChange(event) {
+    this.setState({ search: event.target.value });
   }
 
   componentDidMount() {
-    $.getJSON('https://cdn.jsdelivr.net/gh/dhalsim/aklingozu@latest/src/dist/index.elastic.nohtml.json',
-      (data) => { 
-        console.log(data);
-        this.setState({ loaded: false });
+    const version = '@v0.3'
+    const localStorage = window.localStorage;
+    const localStorageIndexKey = `index${version}`;
+    const index = localStorage.getItem(localStorageIndexKey);
+
+    if (localStorage && index) {
+      this.setState({ loaded: true, index: JSON.parse(index) });
+
+      console.log('this.state.index: ', this.state.index);      
+    } else {
+      $.get({
+        url: `https://cdn.jsdelivr.net/gh/dhalsim/aklingozu${version}/src/dist/index.elastic.nohtml.json`,
+        success: (data) => { 
+          console.log('data length: ', data.length);
+          if (localStorage) {
+
+            localStorage.setItem(localStorageIndexKey, data);
+          }
+
+          this.setState({ loaded: true, index: data });
+        },
+        dataType: 'text'
       });
+    }
   }
 
   render() {
-    if (loaded) {
+    if (this.state.loaded) {
       return (
         <div className="App">
+          <SearchList dump={this.state.index}></SearchList>
+
           <div>
-            <input type="text" />
-            <button onClick={ this.handleSearch }>Ara</button>
+            <input type="text" 
+              value={ this.state.search }
+              onChange={ this.handleChange } />
+            <button onClick={ this.clearSearch }>Temizle</button>
           </div>
   
           <ul>
@@ -38,7 +73,7 @@ class App extends Component {
               threads.map(thr => {
                 return (
                   <li key={ thr.index }>
-                    <a>{ thr.desc }</a>
+                    <a href="javascript;">{ thr.desc }</a>
                   </li>
                 );
               })
@@ -47,7 +82,7 @@ class App extends Component {
         </div>
       );
     } else {
-      <div>Yükleniyor, bekleyiniz...</div>
+      return (<div>Yükleniyor, bekleyiniz...</div>);
     }
   }
 }

@@ -10,14 +10,18 @@
     "eject": "react-scripts eject",
     "crawl": "node ./src/crawler",
     "index": "node ./src/indexer",
-    "search": "node ./src/read_thread",
+    "search": "DEBUG=* node ./src/search",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "debug": "node --nolazy --inspect-brk=5858 src/read_thread.js"
+    "deploy-site": "gh-pages -d build",
+    "deploy-api": "gh-pages -d build",
+    "serve": "node ./src/search",
+    "debug": "node --nolazy --inspect-brk=5858 ./src/search.js"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
+    "debug": "^3.1.0",
     "elasticlunr": "^0.9.5",
+    "express": "^4.16.3",
     "gh-pages": "^1.1.0",
     "html-entities": "^1.2.1",
     "jquery": "^3.3.1",

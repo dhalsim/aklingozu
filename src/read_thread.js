@@ -14,7 +14,7 @@ const writeThreads = (entry, docs) => {
 };
 
 const workflow = async () => {
-  const dump = await readFile('./index.elastic.nospace.json');
+  const dump = await readFile('./src/dist/index.elastic.nospace.json');
   const index = elasticlunr.Index.load(dump);
   
   const su = index.search('bal')[0];
