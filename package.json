@@ -8,13 +8,12 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "crawl": "node ./src/crawler",
-    "index": "node ./src/indexer",
-    "search": "DEBUG=* node ./src/search",
+    "crawler": "node ./src/crawler",
+    "indexer": "node ./src/indexer",
+    "server": "DEBUG=* node ./src/server/index.js",
     "predeploy": "npm run build",
     "deploy-site": "gh-pages -d build",
     "deploy-api": "gh-pages -d build",
-    "serve": "node ./src/search",
     "debug": "node --nolazy --inspect-brk=5858 ./src/search.js"
   },
   "dependencies": {
